@@ -2,6 +2,8 @@
  * Tokenizer results.
  */
 
+library path_to_regexp_port;
+
 //
 enum LexTokenType {
   OPEN,
