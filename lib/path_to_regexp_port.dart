@@ -630,6 +630,9 @@ RegExp tokensToRegexp(
       final prefix = escapeString(encoder(token.prefix));
       final suffix = escapeString(encoder(token.suffix));
 
+      final groupName =
+          ![null, ''].contains(token.name) ? '?<${token.name}>' : '';
+
       if (!['', null].contains(token.pattern)) {
         if (keys != null) {
           keys.add(token);
@@ -641,10 +644,11 @@ RegExp tokensToRegexp(
             route +=
                 '(?:$prefix((?:${token.pattern})(?:$suffix$prefix(?:${token.pattern}))*)$suffix)$mod';
           } else {
-            route += '(?:$prefix(${token.pattern})$suffix)${token.modifier}';
+            route +=
+                '(?:$prefix($groupName${token.pattern})$suffix)${token.modifier}';
           }
         } else {
-          route += '(${token.pattern})${token.modifier}';
+          route += '($groupName${token.pattern})${token.modifier}';
         }
       } else {
         route += '(?:$prefix$suffix)${token.modifier}';
