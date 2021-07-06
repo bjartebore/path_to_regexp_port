@@ -224,7 +224,7 @@ List<Token> parse(
     if (name != null || pattern != null) {
       String? prefix = char ?? '';
 
-      if (prefixes.split('').contains(prefix)) {
+      if (!prefixes.split('').contains(prefix)) {
         path = '$path$prefix';
         prefix = '';
       }
@@ -630,8 +630,9 @@ RegExp tokensToRegexp(
       final prefix = escapeString(encoder(token.prefix));
       final suffix = escapeString(encoder(token.suffix));
 
-      final groupName =
-          ![null, ''].contains(token.name) ? '?<${token.name}>' : '';
+      final groupName = ![null, ''].contains(token.name) && token.name is String
+          ? '?<${token.name}>'
+          : '';
 
       if (!['', null].contains(token.pattern)) {
         if (keys != null) {
