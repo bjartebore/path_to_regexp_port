@@ -1,6 +1,6 @@
 name: path_to_regexp_port
 description: A simple command-line application.
-version: 1.0.1
+version: 1.0.2
 repository: https://github.com/bjartebore/path_to_regexp_port
 
 environment:
